@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    body {
+      font-family: sans-serif;
+
+    }
+
+    .buttons {
+      font-family: sans-serif;
+      font-size: 15px;
+      border-radius: 10px;
+      border-width: medium;
+      background-color: #808080;
+      color: #F8F8FF;
+      padding: 3.5px 10px;
+    }
+
+    a {
+      color: #2F4F4F;
+    }
+
+
+  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cultura Generala</title>
+</head>
+<body>
+  <center><h1 id="Intrebare"></h1></center>
+  <br />
+  <p id="output"></p>
+  <br />
+  <p id="output2"></p>
+  <img id="imagine sugestiva" />
+  <input id="inp" style="margin-left: 100px"></input>
+  <button class="buttons" onClick="pressed()">Click</button>
+  <br />
+  <br />
+  <a href="file:///C:/Users/Lenovo/Desktop/quizz(js_css)/templates/index.html">Home</a>
+  <script>
+    const intrebariRapunsuri =  new Map([
+      ["Ce se afla intre soare si luna?", 'si'],
+      ["Care a fost primul om in spatiu?", 'Iuri Gagarin'],
+      ['cat timp a durat rasboiul de 100 ani?', '116'],
+
+    ]);
+    let intrebariCorecte = 0;
+    let raspuns = '';
+    const titlu = document.getElementById("Intrebare");
+    const input = document.getElementById("inp");
+    const output = document.getElementById("output");
+    const output2 = document.getElementById("output2");
+
+    let intrebare = Array.from(intrebariRapunsuri.keys())[Math.floor(Math.random() * Array.from(intrebariRapunsuri.keys()).length)];
+    //console.log(intrebare);
+    let k = 1;
+
+    titlu.innerHTML = "Q " + k;
+    output.innerHTML = intrebare;
+    function pressed(){
+      output.innerHTML = '';
+      titlu.innerHTML = "Q " + k;
+      output.innerHTML = intrebare;
+      if (intrebare != undefined){
+        if (input.value === intrebariRapunsuri.get(intrebare)){
+          output2.innerHTML = "Corect!";
+          intrebariCorecte ++;
+        }
+        else{
+          output2.innerHTML = "Nu, raspunsul corect era " + intrebariRapunsuri.get(intrebare);
+        }
+
+        intrebariRapunsuri.delete(intrebare)
+        intrebare =  Array.from(intrebariRapunsuri.keys())[Math.floor(Math.random() * Array.from(intrebariRapunsuri.keys()).length)];
+        inp.value = ' ';
+        if (intrebare == undefined){
+          output2.innerHTML = ''
+          output.innerHTML = "Felicitari! Ai raspuns corect la " + intrebariCorecte + " intrebari!";
+        }
+        else{
+          k ++;
+          output.innerHTML = ''
+          titlu.innerHTML = "Q " + k;
+          output.innerHTML = intrebare;
+
+        }
+      }
+      else{
+        if (input.value === intrebariRapunsuri.get(intrebare)){
+          output2.innerHTML = "Corect!";
+          intrebariCorecte ++;
+        }
+        output2.innerHTML = ''
+        output.innerHTML = "Felicitari! Ai raspuns corect la " + intrebariCorecte + " intrebari!";
+      }
+
+  }
+
+    </script>
+</body>
+</html>
